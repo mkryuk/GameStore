@@ -8,11 +8,9 @@
 
 @foreach (var p in @Model.Games)
 {
-    <div>
-        <h3>@p.Name</h3>
-        <p>@p.Description</p>
-        <h4>@p.Price.ToString("# uah")</h4>
-    </div>
+    @Html.Partial("GameSummary", p)
 }
 
-<div>@Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))</div>
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>
