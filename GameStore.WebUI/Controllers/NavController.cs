@@ -1,4 +1,5 @@
 ﻿using GameStore.Domain.Abstract;
+using GameStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,11 @@ namespace GameStore.WebUI.Controllers
                 .Select(item => item.Category)
                 .Distinct()
                 .OrderBy(item => item);
-            ViewBag.SelectedCategory = category;
-            return PartialView(categories);
+            return PartialView(new NavigationViewModel
+            {
+                Categories = categories,
+                CurrentCategory = category
+            });
         }
     }
 }
