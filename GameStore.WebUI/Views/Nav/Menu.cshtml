@@ -1,12 +1,13 @@
-﻿@model IEnumerable<string>
+﻿@using GameStore.WebUI.Models
+@model NavigationViewModel
 @Html.ActionLink("Home", "List", "Game", null,
     new
     {
         @class = "btn btn-block btn-default btn-lg"
-        + (ViewBag.SelectedCategory == null ? " btn-primary" : "")
+        + (Model.CurrentCategory == null ? " btn-primary" : "")
     })
 
-@foreach (var category in Model)
+@foreach (var category in Model.Categories)
 {
 
     @Html.RouteLink(category, new
@@ -18,6 +19,6 @@
     }, new
     {
         @class = "btn btn-block btn-default btn-lg"
-        + (category == ViewBag.SelectedCategory ? " btn-primary" : "")
+        + (category == Model.CurrentCategory ? " btn-primary" : "")
     })
 }

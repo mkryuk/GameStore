@@ -122,7 +122,7 @@ namespace GameStore.UnitTests
             });
 
             var controller = new NavController(mock.Object);
-            List<string> result = ((IEnumerable<string>)controller.Menu().Model).ToList();
+            List<string> result = ((NavigationViewModel)controller.Menu().Model).Categories.ToList();
 
             Assert.AreEqual(result.Count(), 3);
             Assert.AreEqual(result[0], "Cat1");
@@ -142,7 +142,7 @@ namespace GameStore.UnitTests
 
             string categoryToSelect = "Cat2";
             var controller = new NavController(mock.Object);
-            var result = controller.Menu(categoryToSelect).Model;                        
+            var result = ((NavigationViewModel)controller.Menu(categoryToSelect).Model).CurrentCategory;                        
             Assert.AreEqual(result, "Cat2");
         }
 
