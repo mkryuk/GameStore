@@ -174,7 +174,7 @@ namespace GameStore.UnitTests
             Assert.AreEqual(res2, 2);
             Assert.AreEqual(res3, 1);
             Assert.AreEqual(resAll, 5);
-        }
+        }        
 
     }
 }
