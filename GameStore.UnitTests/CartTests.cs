@@ -1,7 +1,11 @@
 ﻿using GameStore.Domain.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using GameStore.Domain.Abstract;
+using Moq;
 using System.Collections.Generic;
+using GameStore.WebUI.Controllers;
+using GameStore.WebUI.Models;
 
 namespace GameStore.UnitTests
 {
@@ -92,6 +96,52 @@ namespace GameStore.UnitTests
             cart.Clear();
 
             Assert.AreEqual(cart.Lines.Count(), 0);
+        }
+
+        [TestMethod]
+        public void CanAddToCart()
+        {
+            var mock = new Mock<IGameRepository>();
+            mock.Setup(item => item.Games).Returns(new List<Game> {
+                new Game { GameId = 1, Name = "Game1", Category = "Category1"}                
+            }.AsQueryable());
+
+            var cart = new Cart();
+            var controller = new CartController(mock.Object);
+
+            controller.AddToCart(cart, 1, null);
+
+            Assert.AreEqual(cart.Lines.Count(), 1);
+            Assert.AreEqual(cart.Lines[0].Game.GameId, 1);
+        }
+
+        [TestMethod]
+        public void AddingGameToCartLeadsToCartScreen()
+        {
+            var mock = new Mock<IGameRepository>();
+            mock.Setup(item => item.Games).Returns(new List<Game> {
+                new Game { GameId = 1, Name = "Game1", Category = "Category1"}
+            }.AsQueryable());
+
+            var cart = new Cart();
+            var controller = new CartController(mock.Object);
+
+            var result = controller.AddToCart(cart, 1, "myUrl");
+
+            Assert.AreEqual(result.RouteValues["action"], "Index");
+            Assert.AreEqual(result.RouteValues["returnUrl"], "myUrl");
+        }
+
+        [TestMethod]
+        public void CanViewCartContents()
+        {
+            var cart = new Cart();
+            var target = new CartController(null);
+
+            var result = (CartIndexViewModel)target.Index(cart, "myUrl").ViewData.Model;
+
+            Assert.AreSame(result.Cart, cart);
+            Assert.AreEqual(result.ReturnUrl, "myUrl");
         }
 
     }
