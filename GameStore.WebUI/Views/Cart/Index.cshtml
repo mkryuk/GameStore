@@ -25,6 +25,14 @@
                 <td class="text-right">
                     @((line.Quantity * line.Game.Price).ToString("# uah"))
                 </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("GameId", line.Game.GameId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input type="submit" value="Delete" class="btn btn-sm btn-warning" />
+                    }
+                </td>
             </tr>
         }
     </tbody>
