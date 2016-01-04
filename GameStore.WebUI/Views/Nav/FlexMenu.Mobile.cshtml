@@ -1,0 +1,22 @@
+﻿@using GameStore.WebUI.Models
+@model NavigationViewModel
+<div data-role="navbar">
+    <ul>
+        @foreach (var link in Model.Categories)
+        {
+            <li>
+                @Html.RouteLink(link, new
+           {
+               controller = "Game",
+               action = "List",
+               category = link,
+               page = 1
+           }, new
+           {
+               data_transition = "fade",
+               @class = (link == Model.CurrentCategory ? "ui-btn-active" : null)
+           })
+            </li>
+        }
+    </ul>
+</div>
