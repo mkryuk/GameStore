@@ -16,14 +16,21 @@ namespace GameStore.WebUI.Controllers
             repository = repo;
         }
         // GET: Nav
-        public PartialViewResult Menu(string category = null)
+        public PartialViewResult Menu(string category = null, bool horizontalNav = false)
         {
             var categories = repository.Games
                 .Select(item => item.Category)
                 .Distinct()
                 .OrderBy(item => item);
-            return PartialView(new NavigationViewModel
-            {
+
+            //var viewName = horizontalNav ? "MenuHorizontal" : "Menu";
+            //return PartialView(new NavigationViewModel
+            //{
+            //    Categories = categories,
+            //    CurrentCategory = category
+            //});
+
+            return PartialView("FlexMenu", new NavigationViewModel {
                 Categories = categories,
                 CurrentCategory = category
             });
