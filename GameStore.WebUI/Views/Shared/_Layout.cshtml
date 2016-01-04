@@ -4,21 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap-theme.css" rel="stylesheet" />*@
     <link href="~/Content/ErrorStyle.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">GameStore - магазин компьютерных игр</a>
+        <a class="navbar-brand" href="#">
+            <span class="hidden-xs">GameStore - магазин компьютерных игр</span>
+            <div class="visible-xs">Game</div>
+            <div class="visible-xs">Store</div>
+        </a>
         @Html.Action("Summary", "Cart")
     </div>
-    <div class="row panel">
-        <div id="categories" class="col-xs-3">
-            @Html.Action("Menu", "Nav")
-        </div>
-        <div class="col-xs-8">
-            @RenderBody()
+
+    <div class="visible-xs">
+        @Html.Action("Menu", "Nav", new { horizontalNav = true })
+    </div>
+
+    <div class="container-fluid">
+        <div class="row panel">
+            <div id="categories" class="col-sm-3 hidden-xs">
+                @Html.Action("Menu", "Nav")
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                @RenderBody()
+            </div>
         </div>
     </div>
 </body>
