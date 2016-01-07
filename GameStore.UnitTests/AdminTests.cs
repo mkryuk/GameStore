@@ -110,5 +110,26 @@ namespace GameStore.UnitTests
             // Check that result is ViewResult
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void CanDeleteValidGame()
+        {
+            var mock = new Mock<IGameRepository>();
+            var game = new Game {GameId = 2, Name = "Game2"};
+            mock.Setup(m => m.Games)
+                .Returns(new List<Game>
+                {
+                    new Game {GameId = 1, Name = "Game1" },
+                    new Game {GameId = 2, Name = "Game2" },
+                    new Game {GameId = 3, Name = "Game3" },
+                    new Game {GameId = 4, Name = "Game4" },
+                });
+
+            var controller = new AdminController(mock.Object);
+
+            controller.Delete(game.GameId);
+
+            mock.Verify(m => m.DeleteGame(game.GameId));
+        }
     }
 }

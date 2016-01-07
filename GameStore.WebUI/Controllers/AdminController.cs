@@ -41,5 +41,21 @@ namespace GameStore.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
+        public ViewResult Create()
+        {
+            return View("Edit", new Game());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int gameId)
+        {
+            var deletedGame = repository.DeleteGame(gameId);
+            if (deletedGame != null)
+            {
+                TempData["message"] = $"Игра \"{deletedGame.Name}\" была удалена";
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -9,11 +9,7 @@ namespace GameStore.Domain.Concrete
     public class EFGameRepository : IGameRepository
     {
         EFDbContext context = new EFDbContext();
-        public IEnumerable<Game> Games
-        {
-            get
-            { return context.Games; }
-        }
+        public IEnumerable<Game> Games => context.Games;
 
         public void SaveGame(Game game)
         {
@@ -30,6 +26,17 @@ namespace GameStore.Domain.Concrete
                 item.Price = game.Price;
             }
             context.SaveChanges();
+        }
+
+        public Game DeleteGame(int gameId)
+        {
+            var item = context.Games.FirstOrDefault(g => g.GameId == gameId);
+            if (item != null)
+            {
+                context.Games.Remove(item);
+                context.SaveChanges();
+            }
+            return item;
         }
     }
 }
