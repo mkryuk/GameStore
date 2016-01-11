@@ -33,9 +33,16 @@ namespace GameStore.WebUI.Controllers
 
         // POST: /Admin/Edit?Gameid={gameid}
         [HttpPost]
-        public ActionResult Edit(Game game)
+        public ActionResult Edit(Game game, HttpPostedFileBase image = null)
         {
             if (!ModelState.IsValid) return View(game);
+
+            if (image != null)
+            {
+                game.ImageMimeType = image.ContentType;
+                game.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(game.ImageData, 0, image.ContentLength);
+            }
 
             repository.SaveGame(game);
             TempData["message"] = $"Изменения в игре \"{game.Name}\" были сохранены";
