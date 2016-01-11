@@ -8,6 +8,7 @@ using GameStore.Domain.Entities;
 
 namespace GameStore.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         IGameRepository repository;
