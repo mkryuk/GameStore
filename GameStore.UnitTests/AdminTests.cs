@@ -59,10 +59,10 @@ namespace GameStore.UnitTests
             var game3 = controller.Edit(3).Model as Game;
             var game4 = controller.Edit(4).Model as Game;
 
-            Assert.AreEqual(1, game1?.GameId);
-            Assert.AreEqual(2, game2?.GameId);
-            Assert.AreEqual(3, game3?.GameId);
-            Assert.AreEqual(4, game4?.GameId);
+            Assert.AreEqual(1, game1.GameId);
+            Assert.AreEqual(2, game2.GameId);
+            Assert.AreEqual(3, game3.GameId);
+            Assert.AreEqual(4, game4.GameId);
         }
 
         [TestMethod]
