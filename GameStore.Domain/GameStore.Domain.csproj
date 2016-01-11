@@ -60,28 +60,11 @@
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Game.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
-    <Compile Include="Migrations\201601021338227_InitialCreate.cs" />
-    <Compile Include="Migrations\201601021338227_InitialCreate.Designer.cs">
-      <DependentUpon>201601021338227_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601072016367_Add_Constraints.cs" />
-    <Compile Include="Migrations\201601072016367_Add_Constraints.Designer.cs">
-      <DependentUpon>201601072016367_Add_Constraints.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601021338227_InitialCreate.resx">
-      <DependentUpon>201601021338227_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601072016367_Add_Constraints.resx">
-      <DependentUpon>201601072016367_Add_Constraints.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

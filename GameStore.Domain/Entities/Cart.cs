@@ -8,7 +8,11 @@ namespace GameStore.Domain.Entities
 {
     public class Cart
     {
-        public List<CartLine> Lines { get; private set; } = new List<CartLine>();
+        public List<CartLine> Lines { get; private set; }
+        public Cart()
+        {
+            Lines = new List<CartLine>();
+        }
         public void AddItem(Game game, int quantity)
         {
             var item = Lines.FirstOrDefault(it => it.Game.GameId == game.GameId);
